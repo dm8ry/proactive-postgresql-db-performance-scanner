@@ -50,7 +50,7 @@ If there are several PostgreSQL databases that need to be monitored, the Proacti
 
 The basic version of the script contains sample checks that can be used for monitoring. It includes probes related to connection utilization, long non-optimal queries, high CPU utilization by queries, etc. It can be extended to any other metrics and indicators that it is important to monitor and check.
 
-Example of how to run the Proactive PostgreSQL DB Performance Scanner:
+```Example of how to run the Proactive PostgreSQL DB Performance Scanner:
 proactive_pg_db_performance_scanner.sh -h db_host -p 5432 -U postgres -d postgres
 Examples of output:
 Check in the pg_stat_statements DB queries that take more than 5000 ms
@@ -64,9 +64,9 @@ Details:
   11111 | 11112 |    my_database_1     |  33333.00  |     1 | 33333 | update my_table set a='12345'                                | vwv 
   11111 | 11112 |    my_database_1     |  11111.00  |     1 | 11111 | delete from my_table where a='12345'                         | vwv 
 (3 rows)
-Recommendation: Check why the query/queries take so much time. It may be a heavy non-optimized query. Maybe it's an unusual application pattern.
+Recommendation: Check why the query/queries take so much time. It may be a heavy non-optimized query. Maybe it's an unusual application pattern.```
 
-Check the queries that occupy more than 15 % of a CPU
+```Check the queries that occupy more than 15 % of a CPU
 DateTime: 20230106_115523
 Environment: Host:db_host; Port:5432; DB_Username:postgres; DB_Name: postgres
 Issue: Query/queries that utilize significant portion of CPU
@@ -76,9 +76,9 @@ Details:
   11111 | 11112 |    my_database_1    | 888799911.12 | 9999999 |    88.88 |            80.00 | select * from my_table where a='12345' | wvw
   11111 | 11112 |    my_database_1    |     99999.99 |       1 | 99999.99 |            20.00 | update my_table set a='12345'          | wvw
 (2 rows)
-Recommendation: Check why the query/queries take a significant portion of the CPU. Maybe it takes significant time. Maybe it's running too frequently. Try to analyze why this DB query takes a significant part of the CPU.
+Recommendation: Check why the query/queries take a significant portion of the CPU. Maybe it takes significant time. Maybe it's running too frequently. Try to analyze why this DB query takes a significant part of the CPU.```
 
-The query/queries that allocates/allocate a significant number of connection slots (Threshold=300)
+```The query/queries that allocates/allocate a significant number of connection slots (Threshold=300)
 DateTime: 20230106_120551
 Environment: Host:db_host; Port:5432; DB_Username:postgres; DB_Name: postgres
 Issue: The most of connection slots are occupied by single query
@@ -88,4 +88,4 @@ Details:
  55.50 | select * from my_table where a='12345'                |                                            555 |                1000 | wvw
  33.30 | update my_table set a='12345'                         |                                            333 |                1000 | wvw
 (2 rows)
-Recommendation: Check why a single pattern of queries allocates so many connection slots. It may be application logic, or an unusual application pattern issue. 
+Recommendation: Check why a single pattern of queries allocates so many connection slots. It may be application logic, or an unusual application pattern issue.```
