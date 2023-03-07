@@ -1,5 +1,5 @@
 
-Proactive PostgreSQL DB Performance Scanner
+## Proactive PostgreSQL DB Performance Scanner
 
 Deep night. The phone rings. The critical situation in the system. CPU is reached one hundred percent. There is an urgent need to find a solution.
 
@@ -11,39 +11,39 @@ Like in medicine, we want to find a cure as soon as the first symptoms appear.
 
 Databases are an essential key element of modern systems.
 
-This blog is about monitoring PostgreSQL database(s).
-
-It describes an approach that makes it easy to identify queries that use the system inefficiently, help to find a root cause for the performance issues, and assist to understand typical workload patterns and performance bottlenecks. The found patterns and queries can be improved and the system will work efficiently and resiliently.
+The Proactive PostgreSQL DB Performance Scanner introduces an approach that makes it easy to identify queries that use the system inefficiently, help to find a root cause for the performance issues, and assist to understand typical workload patterns and performance bottlenecks. The found patterns and queries can be improved and the system will work efficiently and resiliently.
 
 The Proactive PostgreSQL Database(s) Performance Scanner is a script that connects to a database and runs a set of probes that can be extended if desired. All the probes are queries to a database, that are unified by structure.
 
 It includes:
 
-the threshold value,
-description of the check,
-to which issue this check is associated,
-recommendation on how to troubleshoot the issue
-SQL query to perform the check
-an additional optional SQL query in case there is a need for more evidence
+- the threshold value
+- description of the check
+- to which issue this check is associated
+- recommendation on how to troubleshoot the issue
+- SQL query to perform the check
+- an additional optional SQL query in case there is a need for more evidence
+
 If some check exceeds the threshold value, then the corresponding report will be generated in the following standard form:
 
-description of the check
-datetime
-environment details
-issue
-details about the issue
-additional evidence
-recommendation
+- description of the check
+- datetime
+- environment details
+- issue
+- details about the issue
+- additional evidence
+- recommendation
 
 The script has the following structure:
 
-the function that executes the probes (mainProcessor)
-the function that checks input parameters (helpFunction)
-set the number of characters the queries will be cut. It's useful to make output readable in case queries are too long.
-populate the environment details.
-check the PostgreSQL version. It is useful in case different queries/checks should be performed depending on the version of the DB engine.
-check the pg_stat_statements extension is enabled. The script is using it.
-expandable set of probes.
+- the function that executes the probes (mainProcessor)
+- the function that checks input parameters (helpFunction)
+- set the number of characters the queries will be cut; it's useful to make output readable in case queries are too long
+- populate the environment details
+- check the PostgreSQL version; it is useful in case different queries/checks should be performed depending on the version of the DB engine
+- check the pg_stat_statements extension is enabled; the script is using it
+- expandable set of probes
+
 The monitoring script has the option to run different types of queries depending on the version of the PostgreSQL database being checked. It's useful when the database metadata structure depends on the version.
 
 If there are several PostgreSQL databases that need to be monitored, the Proactive PostgreSQL Database(s) Performance Scanner script can be run in a loop.
@@ -54,9 +54,7 @@ Example of how to run the Proactive PostgreSQL DB Performance Scanner:
 
 `proactive_pg_db_performance_scanner.sh -h db_host -p 5432 -U postgres -d postgres`
 
-Examples of output:
-
-1
+Examples of output #1:
 
 ```
 Check in the pg_stat_statements DB queries that take more than 5000 ms
@@ -73,7 +71,7 @@ Details:
 Recommendation: Check why the query/queries take so much time. It may be a heavy non-optimized query. Maybe it's an unusual application pattern.
 ```
 
-2
+Examples of output #2:
 
 ```
 Check the queries that occupy more than 15 % of a CPU
@@ -89,7 +87,7 @@ Details:
 Recommendation: Check why the query/queries take a significant portion of the CPU. Maybe it takes significant time. Maybe it's running too frequently. Try to analyze why this DB query takes a significant part of the CPU.
 ```
 
-3
+Examples of output #3:
 
 ```
 The query/queries that allocates/allocate a significant number of connection slots (Threshold=300)
