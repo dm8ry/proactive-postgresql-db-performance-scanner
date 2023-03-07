@@ -54,7 +54,7 @@ Example of how to run the Proactive PostgreSQL DB Performance Scanner:
 
 `proactive_pg_db_performance_scanner.sh -h db_host -p 5432 -U postgres -d postgres`
 
-Examples of output #1:
+Example of output #1:
 
 ```
 Check in the pg_stat_statements DB queries that take more than 5000 ms
@@ -71,7 +71,7 @@ Details:
 Recommendation: Check why the query/queries take so much time. It may be a heavy non-optimized query. Maybe it's an unusual application pattern.
 ```
 
-Examples of output #2:
+Example of output #2:
 
 ```
 Check the queries that occupy more than 15 % of a CPU
@@ -87,7 +87,7 @@ Details:
 Recommendation: Check why the query/queries take a significant portion of the CPU. Maybe it takes significant time. Maybe it's running too frequently. Try to analyze why this DB query takes a significant part of the CPU.
 ```
 
-Examples of output #3:
+Example of output #3:
 
 ```
 The query/queries that allocates/allocate a significant number of connection slots (Threshold=300)
